@@ -20,6 +20,8 @@ const PlaceholderPage: React.FC<{ title: string }> = ({ title }) => (
   </main>
 );
 
+import { Analytics } from "@vercel/analytics/react"
+
 function App() {
   return (
     <div className="min-h-screen flex flex-col bg-gray-100">
@@ -51,6 +53,7 @@ function App() {
         </Routes>
       </div>
       <Footer />
+      <Analytics />
     </div>
   );
 }
