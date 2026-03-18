@@ -17,13 +17,12 @@ const navItems = [
         label: 'AKD',
         href: '/akd',
         children: [
-            { label: 'Komisi I', href: '/akd/komisi-1' },
-            { label: 'Komisi II', href: '/akd/komisi-2' },
-            { label: 'Komisi III', href: '/akd/komisi-3' },
+            { label: 'Pimpinan DPRD', href: '/akd/pimpinan' },
             { label: 'Badan Musyawarah', href: '/akd/bamus' },
+            { label: 'Badan Pembentukan Peraturan Daerah', href: '/akd/bapemperda' },
             { label: 'Badan Anggaran', href: '/akd/banggar' },
-            { label: 'Bapemperda', href: '/akd/bapemperda' },
             { label: 'Badan Kehormatan', href: '/akd/bk' },
+            { label: 'Komisi', href: '/akd/komisi' },
         ],
     },
     {

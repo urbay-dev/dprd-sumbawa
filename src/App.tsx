@@ -5,6 +5,8 @@ import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import BeritaPage from './pages/BeritaPage';
 import PimpinanPage from './pages/PimpinanPage';
+import AKDPage from './pages/AKDPage';
+import SekretariatPage from './pages/SekretariatPage';
 
 // Generic placeholder page for unbuilt pages
 const PlaceholderPage: React.FC<{ title: string }> = ({ title }) => (
@@ -32,11 +34,11 @@ function App() {
           <Route path="/berita" element={<BeritaPage />} />
           <Route path="/berita/:slug" element={<BeritaPage />} />
           <Route path="/pimpinan" element={<PimpinanPage />} />
-          <Route path="/akd" element={<PlaceholderPage title="Alat Kelengkapan Dewan (AKD)" />} />
-          <Route path="/akd/:slug" element={<PlaceholderPage title="Komisi DPRD" />} />
+          <Route path="/akd" element={<AKDPage />} />
+          <Route path="/akd/:slug" element={<AKDPage />} />
           <Route path="/fraksi" element={<PlaceholderPage title="Fraksi DPRD" />} />
           <Route path="/fraksi/:slug" element={<PlaceholderPage title="Fraksi" />} />
-          <Route path="/sekretariat" element={<PlaceholderPage title="Sekretariat DPRD" />} />
+          <Route path="/sekretariat" element={<SekretariatPage />} />
           <Route path="/ppid" element={<PlaceholderPage title="PPID - Keterbukaan Informasi Publik" />} />
           <Route path="/ppid/:slug" element={<PlaceholderPage title="PPID" />} />
           <Route path="/agenda" element={<PlaceholderPage title="Agenda Kegiatan" />} />
