@@ -1,18 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Search, ChevronDown, Menu, X, Phone, Mail, MapPin, Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Search, Menu, X, ChevronDown } from 'lucide-react';
 
 const navItems = [
     { label: 'Beranda', href: '/' },
-    {
-        label: 'Profil',
-        href: '/profil',
-        children: [
-            { label: 'Sejarah DPRD', href: '/profil/sejarah' },
-            { label: 'Visi & Misi', href: '/profil/visi-misi' },
-            { label: 'Struktur Organisasi', href: '/profil/struktur' },
-        ],
-    },
     {
         label: 'Berita',
         href: '/berita',
@@ -22,7 +13,6 @@ const navItems = [
             { label: 'Pengumuman', href: '/berita/pengumuman' },
         ],
     },
-    { label: 'Pimpinan Dewan', href: '/pimpinan' },
     {
         label: 'AKD',
         href: '/akd',
@@ -48,16 +38,7 @@ const navItems = [
             { label: 'Fraksi NasDem', href: '/fraksi/nasdem' },
         ],
     },
-    { label: 'Sekretariat', href: '/sekretariat' },
-    {
-        label: 'PPID',
-        href: '/ppid',
-        children: [
-            { label: 'Profil PPID', href: '/ppid/profil' },
-            { label: 'Informasi Publik', href: '/ppid/informasi' },
-            { label: 'Permohonan Informasi', href: '/ppid/permohonan' },
-        ],
-    },
+    { label: 'Sekretariat DPRD', href: '/sekretariat' },
     {
         label: 'Silegda',
         href: '/silegda',
@@ -67,7 +48,16 @@ const navItems = [
             { label: 'Propemperda 2026', href: '/silegda/2026' },
         ],
     },
-    { label: 'Agenda', href: '/agenda' },
+    {
+        label: 'PPID',
+        href: '/ppid',
+        children: [
+            { label: 'Profil PPID', href: '/ppid/profil' },
+            { label: 'Informasi Publik', href: '/ppid/informasi' },
+            { label: 'Permohonan Informasi', href: '/ppid/permohonan' },
+        ],
+    },
+    { label: 'Podcast', href: '/podcast' },
 ];
 
 const Header: React.FC = () => {
@@ -75,155 +65,153 @@ const Header: React.FC = () => {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [openDropdown, setOpenDropdown] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
+    const location = useLocation();
 
     useEffect(() => {
-        const handleScroll = () => setIsScrolled(window.scrollY > 60);
+        const handleScroll = () => setIsScrolled(window.scrollY > 10);
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    return (
-        <header className={`sticky top-0 z-50 transition-shadow duration-300 ${isScrolled ? 'shadow-xl' : ''}`}>
-            {/* Top info bar */}
-            <div className="bg-[#0a2744] text-white text-xs py-1.5 px-4 hidden lg:flex justify-between items-center">
-                <div className="flex items-center gap-5">
-                    <span className="flex items-center gap-1.5 text-gray-300">
-                        <MapPin size={11} className="text-yellow-400" />
-                        Jl. Garuda No. 1, Taliwang, Sumbawa Barat
-                    </span>
-                    <span className="flex items-center gap-1.5 text-gray-300">
-                        <Phone size={11} className="text-yellow-400" />
-                        (0372) 81XXXX
-                    </span>
-                    <span className="flex items-center gap-1.5 text-gray-300">
-                        <Mail size={11} className="text-yellow-400" />
-                        dprd@sumbawabarat.go.id
-                    </span>
-                </div>
-                <div className="flex items-center gap-1">
-                    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"
-                        className="w-6 h-6 rounded flex items-center justify-center bg-blue-700 hover:bg-blue-600 transition-colors">
-                        <Facebook size={11} />
-                    </a>
-                    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"
-                        className="w-6 h-6 rounded flex items-center justify-center bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 hover:opacity-90 transition-opacity">
-                        <Instagram size={11} />
-                    </a>
-                    <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer"
-                        className="w-6 h-6 rounded flex items-center justify-center bg-red-600 hover:bg-red-700 transition-colors">
-                        <Youtube size={11} />
-                    </a>
-                    <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
-                        className="w-6 h-6 rounded flex items-center justify-center bg-sky-500 hover:bg-sky-600 transition-colors">
-                        <Twitter size={11} />
-                    </a>
-                </div>
-            </div>
+    // Helper to close dropdown when clicking outside or navigating
+    useEffect(() => {
+        setOpenDropdown(null);
+        setMobileOpen(false);
+    }, [location.pathname]);
 
-            {/* Logo & search bar */}
-            <div className="bg-white py-2.5 px-6 flex items-center justify-between border-b border-gray-200">
-                <Link to="/" className="flex items-center gap-3">
-                    {/* Logo circle */}
-                    <div className="relative w-16 h-16 flex-shrink-0">
-                        <div className="w-16 h-16 rounded-full bg-[#0a2744] flex flex-col items-center justify-center border-4 border-yellow-500 shadow">
-                            <span className="text-yellow-400 font-black text-sm leading-none">DPRD</span>
-                            <span className="text-white text-[8px] font-medium text-center leading-tight">Sumbawa<br />Barat</span>
-                        </div>
+    return (
+        <header className={`sticky top-0 z-50 bg-[#0a2744] transition-all duration-300 ${isScrolled ? 'shadow-xl' : ''}`}>
+            <div className="px-4 lg:px-6 h-16 xl:h-20 flex items-center justify-between">
+
+                {/* Left: Logo & Title */}
+                <Link to="/" className="flex items-center gap-3 shrink-0 mr-2 xl:mr-4">
+                    <div className="w-10 h-10 xl:w-12 xl:h-12 rounded-full bg-[#0a2744] flex flex-col items-center justify-center border-2 border-yellow-500 shadow-sm shrink-0">
+                        <span className="text-yellow-400 font-black text-[10px] xl:text-xs leading-none">DPRD</span>
                     </div>
-                    <div>
-                        <div className="text-[#0a2744] font-black text-xl leading-tight tracking-tight">DPRD</div>
-                        <div className="text-[#1a6bb5] font-bold text-base leading-tight">Kabupaten Sumbawa Barat</div>
-                        <div className="text-gray-400 text-xs tracking-wide">Dewan Perwakilan Rakyat Daerah</div>
+                    <div className="text-white font-black text-xs md:text-sm lg:text-base xl:text-lg uppercase tracking-wider hidden sm:block">
+                        DPRD KABUPATEN<br className="lg:hidden" /> SUMBAWA BARAT
                     </div>
                 </Link>
 
-                {/* Right: Search */}
-                <div className="hidden md:flex flex-col items-end gap-2">
-                    <div className="flex rounded overflow-hidden border border-gray-300 focus-within:border-[#1a6bb5] transition-colors">
-                        <input
-                            type="text"
-                            placeholder="Cari Artikel Berita..."
-                            value={searchQuery}
-                            onChange={(e) => setSearchQuery(e.target.value)}
-                            className="px-4 py-2 text-sm w-72 focus:outline-none bg-white"
-                        />
-                        <button className="bg-[#0a2744] hover:bg-[#1a6bb5] text-white px-4 py-2 transition-colors">
-                            <Search size={15} />
-                        </button>
-                    </div>
-                </div>
-            </div>
+                {/* Middle: Desktop Nav */}
+                <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1 flex-1 justify-end mr-4">
+                    {navItems.map((item) => {
+                        const isActive = location.pathname === item.href || (item.href !== '/' && location.pathname.startsWith(item.href));
 
-            {/* Navigation bar */}
-            <nav className="bg-[#0a2744] relative">
-                {/* Desktop nav */}
-                <div className="hidden lg:flex max-w-full">
-                    {navItems.map((item) => (
-                        <div
-                            key={item.label}
-                            className="relative group"
-                            onMouseEnter={() => setOpenDropdown(item.label)}
-                            onMouseLeave={() => setOpenDropdown(null)}
-                        >
-                            <Link
-                                to={item.href}
-                                className="flex items-center gap-1 text-white text-[13px] font-medium px-4 py-3 hover:bg-[#1a6bb5] transition-colors whitespace-nowrap border-r border-white/10 first:border-l"
+                        return (
+                            <div
+                                key={item.label}
+                                className="relative group"
+                                onMouseEnter={() => setOpenDropdown(item.label)}
+                                onMouseLeave={() => setOpenDropdown(null)}
                             >
-                                {item.label}
-                                {item.children && <ChevronDown size={12} className="opacity-70" />}
-                            </Link>
-                            {item.children && openDropdown === item.label && (
-                                <div className="absolute top-full left-0 bg-white shadow-xl border border-gray-100 min-w-52 z-50">
-                                    <div className="h-0.5 bg-[#1a6bb5] w-full" />
-                                    {item.children.map((child) => (
-                                        <Link
-                                            key={child.label}
-                                            to={child.href}
-                                            className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:bg-blue-50 hover:text-[#0a2744] border-b border-gray-50 transition-colors"
-                                        >
-                                            <span className="w-1.5 h-1.5 rounded-full bg-[#1a6bb5] flex-shrink-0" />
-                                            {child.label}
-                                        </Link>
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                    ))}
-                </div>
-
-                {/* Mobile nav */}
-                <div className="lg:hidden flex justify-between items-center px-4 py-3">
-                    <Link to="/" className="text-white font-bold text-sm">DPRD Sumbawa Barat</Link>
-                    <button onClick={() => setMobileOpen(!mobileOpen)} className="text-white p-1">
-                        {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-                    </button>
-                </div>
-                {mobileOpen && (
-                    <div className="lg:hidden bg-[#0d3060] border-t border-white/10">
-                        {navItems.map((item) => (
-                            <div key={item.label}>
                                 <Link
                                     to={item.href}
-                                    className="block text-white py-2.5 px-5 text-sm border-b border-white/10 hover:bg-[#1a6bb5] transition-colors"
-                                    onClick={() => setMobileOpen(false)}
+                                    className={`flex items-center gap-1 text-[11px] xl:text-[13px] font-bold px-2 xl:px-3 py-1.5 xl:py-2 rounded-md transition-all whitespace-nowrap ${isActive
+                                        ? 'bg-[#e0e0e0] text-[#1a1a1a] rounded-md shadow-sm'
+                                        : 'text-gray-200 hover:text-white hover:bg-white/10 rounded-md'
+                                        }`}
                                 >
                                     {item.label}
                                 </Link>
+
+                                {/* Desktop Dropdown Menu */}
+                                {item.children && openDropdown === item.label && (
+                                    <div className="absolute top-full left-0 mt-2 bg-[#1a3a5c] shadow-xl border border-white/5 min-w-[200px] z-50 rounded-lg overflow-hidden">
+                                        {item.children.map((child) => (
+                                            <Link
+                                                key={child.label}
+                                                to={child.href}
+                                                className="block px-4 py-3 text-sm font-medium text-gray-200 hover:bg-[#254d77] hover:text-white transition-colors"
+                                            >
+                                                {child.label}
+                                            </Link>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })}
+                </nav>
+
+                {/* Right: Search */}
+                <div className="hidden md:flex items-center shrink-0">
+                    <div className="relative group">
+                        <input
+                            type="text"
+                            placeholder="Cari Artikel Berita"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="w-48 xl:w-56 pl-5 pr-12 py-2 rounded-full text-[13px] focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white text-gray-900 placeholder-gray-400 font-medium shadow-inner transition-all"
+                        />
+                        <button className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-700 hover:text-black transition-colors focus:outline-none">
+                            <Search size={18} strokeWidth={2.5} />
+                        </button>
+                    </div>
+                </div>
+
+                {/* Mobile Menu Button */}
+                <div className="lg:hidden flex items-center ml-4">
+                    <button onClick={() => setMobileOpen(!mobileOpen)} className="text-white p-2 focus:outline-none">
+                        {mobileOpen ? <X size={26} /> : <Menu size={26} />}
+                    </button>
+                </div>
+            </div>
+
+            {/* Mobile Nav */}
+            <div className={`lg:hidden bg-[#0a2744] border-t border-white/10 overflow-hidden transition-all duration-300 ease-in-out ${mobileOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0'}`}>
+                {/* Mobile Search */}
+                <div className="p-4 border-b border-white/5 md:hidden">
+                    <div className="relative">
+                        <input
+                            type="text"
+                            placeholder="Cari Artikel Berita"
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            className="w-full pl-5 pr-12 py-2.5 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white text-gray-900 placeholder-gray-400 font-medium"
+                        />
+                        <button className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-700 focus:outline-none">
+                            <Search size={18} strokeWidth={2.5} />
+                        </button>
+                    </div>
+                </div>
+
+                {/* Nav Items */}
+                <div className="overflow-y-auto max-h-[calc(80vh-73px)] pb-4">
+                    {navItems.map((item) => (
+                        <div key={item.label}>
+                            <div className="flex items-center justify-between border-b border-white/5">
+                                <Link
+                                    to={item.href}
+                                    className="flex-1 text-white py-3.5 px-5 text-sm font-bold hover:bg-white/5 transition-colors"
+                                >
+                                    {item.label}
+                                </Link>
+                                {item.children && (
+                                    <button
+                                        className="px-5 py-3.5 text-white/50 hover:text-white"
+                                        onClick={() => setOpenDropdown(openDropdown === item.label ? null : item.label)}
+                                    >
+                                        <ChevronDown size={20} className={`transition-transform duration-300 ${openDropdown === item.label ? 'rotate-180' : ''}`} />
+                                    </button>
+                                )}
+                            </div>
+                            {/* Mobile Dropdown */}
+                            <div className={`bg-[#061d33] overflow-hidden transition-all duration-300 ${openDropdown === item.label ? 'max-h-[800px]' : 'max-h-0'}`}>
                                 {item.children?.map((child) => (
                                     <Link
                                         key={child.label}
                                         to={child.href}
-                                        className="block text-blue-200 py-2 pl-9 text-xs border-b border-white/5 hover:bg-[#1a6bb5]/50 transition-colors"
-                                        onClick={() => setMobileOpen(false)}
+                                        className="block text-gray-300 py-3 pl-9 text-sm border-b border-white/5 hover:bg-white/5 hover:text-white font-medium transition-colors"
                                     >
-                                        › {child.label}
+                                        {child.label}
                                     </Link>
                                 ))}
                             </div>
-                        ))}
-                    </div>
-                )}
-            </nav>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </header>
     );
 };

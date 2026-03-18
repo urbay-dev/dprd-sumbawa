@@ -1,5 +1,6 @@
 import React from 'react';
 import { Instagram, ExternalLink, Heart, MessageCircle } from 'lucide-react';
+import { socialConfig } from '../config/social';
 
 // Instagram posts – use real public IG embed links or placeholder images
 // For real integration: use Instagram oEmbed or Basic Display API
@@ -10,7 +11,7 @@ const posts = [
         caption: "Rapat Paripurna DPRD Sumbawa Barat Maret 2026 📋 #DPRDSumbawaBarat #Legislasi",
         likes: 234,
         comments: 18,
-        url: "https://www.instagram.com",
+        url: socialConfig.instagram,
     },
     {
         id: 2,
@@ -18,7 +19,7 @@ const posts = [
         caption: "Kunjungan Kerja Komisi II ke Kecamatan Maluk bersama warga setempat 🤝 #WakilKita",
         likes: 189,
         comments: 12,
-        url: "https://www.instagram.com",
+        url: socialConfig.instagram,
     },
     {
         id: 3,
@@ -26,7 +27,7 @@ const posts = [
         caption: "Pengesahan Perda RTRW 2026–2046 oleh DPRD Sumbawa Barat 🏛️ #Perda #RTRW",
         likes: 312,
         comments: 27,
-        url: "https://www.instagram.com",
+        url: socialConfig.instagram,
     },
     {
         id: 4,
@@ -34,7 +35,7 @@ const posts = [
         caption: "Sidak infrastruktur jalan oleh Komisi III – aspirasi warga jadi prioritas! 🚧",
         likes: 156,
         comments: 9,
-        url: "https://www.instagram.com",
+        url: socialConfig.instagram,
     },
     {
         id: 5,
@@ -42,7 +43,7 @@ const posts = [
         caption: "Forum Dialog Publik bersama masyarakat tentang APBD 2026 💬 #Aspirasi",
         likes: 278,
         comments: 21,
-        url: "https://www.instagram.com",
+        url: socialConfig.instagram,
     },
     {
         id: 6,
@@ -50,7 +51,7 @@ const posts = [
         caption: "Rapat Badan Anggaran – transparansi keuangan daerah Sumbawa Barat 📊 #APBD",
         likes: 198,
         comments: 14,
-        url: "https://www.instagram.com",
+        url: socialConfig.instagram,
     },
 ];
 
@@ -69,12 +70,12 @@ const InstagramSection: React.FC = () => {
                         </div>
                     </div>
                     <a
-                        href="https://www.instagram.com"
+                        href={socialConfig.instagram}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-pink-600 text-sm hover:underline flex items-center gap-1 font-medium"
                     >
-                        @dprdsumbawabarat <ExternalLink size={12} />
+                        {socialConfig.instagramHandle} <ExternalLink size={12} />
                     </a>
                 </div>
 
@@ -117,13 +118,13 @@ const InstagramSection: React.FC = () => {
                 {/* Follow button */}
                 <div className="flex justify-center mt-4">
                     <a
-                        href="https://www.instagram.com"
+                        href={socialConfig.instagram}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex items-center gap-2 text-white font-bold px-8 py-2.5 rounded-full text-sm transition-opacity hover:opacity-90 shadow-lg"
                         style={{ background: 'linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045)' }}
                     >
-                        <Instagram size={16} /> Ikuti @dprdsumbawabarat di Instagram
+                        <Instagram size={16} /> Ikuti {socialConfig.instagramHandle} di Instagram
                     </a>
                 </div>
             </div>

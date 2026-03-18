@@ -1,23 +1,24 @@
 import React from 'react';
 import { Play, Clock, ArrowRight, Youtube } from 'lucide-react';
+import { socialConfig } from '../config/social';
 
-// Use real-ish YouTube video IDs (these are public Indonesian government session videos)
+// Use real-ish YouTube video IDs
 const videos = [
     {
         id: 1,
-        title: "Siaran Langsung Rapat Paripurna DPRD Sumbawa Barat - Pengesahan Raperda",
-        duration: "2:14:30",
+        title: "Live. Bupati Hadiri Rapat Paripurna DPRD Kab. Sumbawa Barat - Penetapan APBD 2024",
+        duration: "2:45:10",
         date: "15 Mar 2026",
-        youtubeId: "jNQXAC9IVRw", // a well-known public video
-        thumbnail: `https://img.youtube.com/vi/jNQXAC9IVRw/mqdefault.jpg`,
+        youtubeId: "z38p3gX7XFw",
+        thumbnail: `https://img.youtube.com/vi/z38p3gX7XFw/mqdefault.jpg`,
     },
     {
         id: 2,
-        title: "Dialog Interaktif Komisi III dengan Warga Taliwang tentang Infrastruktur",
-        duration: "1:42:10",
+        title: "Rapat Paripurna Masa Sidang II 2023 - Jawaban Bupati Terhadap Pandangan Fraksi",
+        duration: "1:22:10",
         date: "12 Mar 2026",
-        youtubeId: "dQw4w9WgXcQ",
-        thumbnail: `https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg`,
+        youtubeId: "eC7i6222b40",
+        thumbnail: `https://img.youtube.com/vi/eC7i6222b40/mqdefault.jpg`,
     },
     {
         id: 3,
@@ -67,12 +68,12 @@ const VideoNews: React.FC = () => {
                         </div>
                     </div>
                     <a
-                        href="https://www.youtube.com"
+                        href={socialConfig.youtube}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-red-600 text-sm hover:underline flex items-center gap-1 font-medium"
                     >
-                        Kunjungi Channel <ArrowRight size={13} />
+                        Kunjungi Channel {socialConfig.youtubeChannelName} <ArrowRight size={13} />
                     </a>
                 </div>
 

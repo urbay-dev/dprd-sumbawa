@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
+import { socialConfig } from '../config/social';
 
 const Footer: React.FC = () => {
     return (
@@ -83,20 +84,20 @@ const Footer: React.FC = () => {
 
                         <h4 className="text-xs font-bold text-yellow-400 uppercase tracking-widest mb-3">Ikuti Kami</h4>
                         <div className="flex gap-2">
-                            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"
+                            <a href={socialConfig.facebook} target="_blank" rel="noopener noreferrer"
                                 className="w-9 h-9 rounded flex items-center justify-center bg-blue-700 hover:bg-blue-600 transition-colors">
                                 <Facebook size={15} />
                             </a>
-                            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"
+                            <a href={socialConfig.instagram} target="_blank" rel="noopener noreferrer"
                                 className="w-9 h-9 rounded flex items-center justify-center hover:opacity-90 transition-opacity"
                                 style={{ background: 'linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045)' }}>
                                 <Instagram size={15} />
                             </a>
-                            <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer"
+                            <a href={socialConfig.youtube} target="_blank" rel="noopener noreferrer"
                                 className="w-9 h-9 rounded flex items-center justify-center bg-red-600 hover:bg-red-700 transition-colors">
                                 <Youtube size={15} />
                             </a>
-                            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer"
+                            <a href={socialConfig.twitter} target="_blank" rel="noopener noreferrer"
                                 className="w-9 h-9 rounded flex items-center justify-center bg-sky-500 hover:bg-sky-600 transition-colors">
                                 <Twitter size={15} />
                             </a>
