@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Youtube, Twitter } from 'lucide-react';
+// No icons used, removed lucide-react
 import { socialConfig } from '../config/social';
 
 const Footer: React.FC = () => {

@@ -1,175 +1,158 @@
-import React from 'react';
-import { Eye, Target, Briefcase, Layers, Users, ChevronRight } from 'lucide-react';
+import React, { useEffect } from 'react';
+import { ChevronRight } from 'lucide-react';
+
+const sekretariatData = {
+    sekretaris: {
+        name: "Drs. H. Augustinus, SE., M.Si",
+        title: "Sekretaris DPRD",
+        location: "DPRD Kabupaten Sumbawa Barat",
+        image: "https://randomuser.me/api/portraits/men/75.jpg"
+    },
+    staff: [
+        { name: "Asril Pinayungan R, SH., M.Si", title: "Kepala Bagian Umum", location: "", image: "https://randomuser.me/api/portraits/men/44.jpg" },
+        { name: "Sarla D.A.G Sinaga, S.STP, MA", title: "Kepala Bagian Perencanaan", location: "", image: "https://randomuser.me/api/portraits/women/68.jpg" },
+        { name: "Nur Achmad, SH., M.Si", title: "Kepala Bagian Hukum", location: "", image: "https://randomuser.me/api/portraits/men/46.jpg" },
+        { name: "Dyah Suryani H., S.Sos", title: "Kepala Bagian Humas", location: "", image: "https://randomuser.me/api/portraits/women/55.jpg" },
+
+        { name: "Rosnaeni, S.Sos", title: "Kasubbag Tata Usaha Kepegawaian", location: "", image: "https://randomuser.me/api/portraits/women/32.jpg" },
+        { name: "Ahmad Yuliadi, SE., MM", title: "Kasubbag Perencanaan & Anggaran", location: "", image: "https://randomuser.me/api/portraits/men/22.jpg" },
+        { name: "Mukholik Maswi, S.Sos.", title: "Kasubbag Persidangan", location: "", image: "https://randomuser.me/api/portraits/men/84.jpg" },
+        { name: "Tri Indra Gunawan, SH., M.Si", title: "Kasubbag Publikasi & Informasi", location: "", image: "https://randomuser.me/api/portraits/men/91.jpg" },
+
+        { name: "Alex Trioso, S.Sos", title: "Kasubbag Rumah Tangga", location: "", image: "https://randomuser.me/api/portraits/men/50.jpg" },
+        { name: "Agus Ermanto, SE", title: "Kasubbag Tata Usaha Keuangan", location: "", image: "https://randomuser.me/api/portraits/men/60.jpg" },
+        { name: "Ramandhika S, SH., MH", title: "Kasubbag Pengkajian Hukum", location: "", image: "https://randomuser.me/api/portraits/men/61.jpg" },
+        { name: "Priyambodo, S.AP", title: "Kasubbag Pengolahan Data", location: "", image: "https://randomuser.me/api/portraits/men/62.jpg" },
+
+        { name: "Juniadi Jatnoprasetyo, S.AP", title: "Kasubbag Perlengkapan", location: "", image: "https://randomuser.me/api/portraits/men/65.jpg" },
+        { name: "Rusda Ulfa, SE", title: "Kasubbag Perbendaharaan", location: "", image: "https://randomuser.me/api/portraits/women/65.jpg" },
+        { name: "Arya Angga Avisena, SE", title: "Kasubbag Kerjasama Antar Lembaga", location: "", image: "https://randomuser.me/api/portraits/men/67.jpg" },
+        { name: "Dudy Setiawan Ibani, S.Kom", title: "Kasubbag Protokol & Pimpinan", location: "", image: "https://randomuser.me/api/portraits/men/68.jpg" }
+    ]
+};
+
+const visiText = "Terwujudnya pelayanan Sekretariat DPRD Kabupaten Sumbawa Barat yang profesional, transparan, dan akuntabilitas dalam memfasilitasi tugas DPRD Kabupaten Sumbawa Barat.";
+const misiText = "Memberikan pelayanan terbaik terhadap pimpinan dan segenap anggota DPRD Kabupaten Sumbawa Barat.";
+const tugasText = "Menyelenggarakan administrasi kesekretariatan dan keuangan, mendukung pelaksanaan tugas dan fungsi DPRD, serta menyediakan dan mengoordinasikan tenaga ahli yang diperlukan oleh DPRD dalam melaksanakan hak dan fungsinya sesuai dengan kebutuhan.";
+const fungsiList = [
+    "Penyusunan rencana strategis, rencana kerja dan anggaran Sekretariat DPRD.",
+    "Pelaksanaan rencana strategis dan dokumen pelaksanaan anggaran Sekretariat DPRD.",
+    "Penyelenggaraan kesekretariatan DPRD.",
+    "Penyelenggaraan administrasi keuangan DPRD.",
+    "Fasilitasi rapat anggota DPRD.",
+    "Penyediaan dan pengoordinasian tenaga ahli yang diperlukan oleh DPRD.",
+    "Fasilitasi pengangkatan, pelantikan, pemberhentian dalam dan dari jabatan Kepala Daerah dan Wakil Kepala Daerah, serta serah terima jabatan pada rapat paripurna DPRD.",
+    "Pengelolaan kepegawaian, keuangan dan kerumahtanggaan Sekretariat DPRD.",
+    "Pengelolaan kearsipan, data dan informasi Sekretariat DPRD.",
+    "Pelaporan dan pertanggungjawaban pelaksanaan tugas pokok dan fungsi."
+];
+
+const renderProfileCard = (person: any) => (
+    <div className="flex flex-col items-center group w-full">
+        <div className="w-full aspect-[3/4] mb-4 relative rounded-md p-1.5 md:p-2 bg-white border border-gray-100 shadow-sm group-hover:shadow-lg transition-all duration-300">
+            <div className="w-full h-full overflow-hidden rounded-md bg-gray-50">
+                <img
+                    src={person.image}
+                    alt={person.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+            </div>
+        </div>
+        <h3 className="font-bold text-[13px] md:text-[14px] text-gray-900 mb-1 text-center px-1 group-hover:text-red-600 transition-colors">
+            {person.name}
+        </h3>
+        <p className="text-[11px] md:text-[12px] text-gray-500 font-medium text-center leading-relaxed">
+            {person.title} {person.location && <><br /> {person.location}</>}
+        </p>
+    </div>
+);
 
 const SekretariatPage: React.FC = () => {
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
+
     return (
-        <main className="max-w-7xl mx-auto px-4 py-8">
-            <div className="text-sm text-gray-400 mb-6 flex items-center gap-2">
-                <a href="/" className="hover:text-primary transition-colors">Beranda</a> <span>/</span>
-                <span className="text-gray-700 font-medium">Sekretariat DPRD</span>
-            </div>
+        <main className="min-h-screen bg-[#fcfcfc] py-12 md:py-20">
+            <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+                <div className="flex flex-col lg:flex-row gap-12 lg:gap-20 items-start">
 
-            <div className="mb-10 text-center max-w-3xl mx-auto">
-                <h1 className="text-3xl md:text-4xl font-black text-[#0a2744] mb-4">Sekretariat DPRD</h1>
-                <p className="text-gray-600 text-sm md:text-base leading-relaxed">
-                    Sekretariat DPRD merupakan unsur pelayanan administrasi dan pemberian dukungan operasional kepada
-                    DPRD Kabupaten Sumbawa Barat yang dipimpin oleh seorang Sekretaris DPRD.
-                </p>
-            </div>
-
-            {/* Visi & Misi Section */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                {/* Visi */}
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 hover:shadow-md transition-shadow relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-bl-full -z-10 group-hover:bg-blue-100 transition-colors duration-500"></div>
-                    <div className="w-14 h-14 bg-gradient-to-br from-[#0a2744] to-blue-600 rounded-xl flex items-center justify-center mb-6 shadow-lg text-white">
-                        <Eye size={28} strokeWidth={2} />
-                    </div>
-                    <h2 className="text-2xl font-black text-[#0a2744] mb-4">Visi</h2>
-                    <p className="text-gray-700 leading-relaxed font-medium text-lg italic">
-                        "Terwujudnya Pelayanan Administrasi dan Fasilitasi Pimpinan dan Anggota DPRD yang Profesional, Akuntabel, dan Inovatif."
-                    </p>
-                </div>
-
-                {/* Misi */}
-                <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 hover:shadow-md transition-shadow relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-50 rounded-bl-full -z-10 group-hover:bg-yellow-100 transition-colors duration-500"></div>
-                    <div className="w-14 h-14 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-xl flex items-center justify-center mb-6 shadow-lg text-white">
-                        <Target size={28} strokeWidth={2} />
-                    </div>
-                    <h2 className="text-2xl font-black text-[#0a2744] mb-4">Misi</h2>
-                    <ul className="space-y-4">
-                        {[
-                            "Meningkatkan kualitas pelayanan administrasi kesekretariatan DPRD.",
-                            "Meningkatkan kapasitas dan profesionalisme sumber daya aparatur.",
-                            "Mengoptimalkan fasilitasi kegiatan rapat, persidangan, dan perundang-undangan.",
-                            "Meningkatkan transparansi dan akuntabilitas pengelolaan keuangan."
-                        ].map((misi, index) => (
-                            <li key={index} className="flex items-start gap-3">
-                                <div className="min-w-6 min-h-6 bg-yellow-100 text-yellow-700 rounded-full flex items-center justify-center text-xs font-bold mt-0.5">
-                                    {index + 1}
-                                </div>
-                                <span className="text-gray-600 leading-relaxed">{misi}</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-            </div>
-
-            {/* Tugas & Fungsi Section */}
-            <div className="bg-[#0a2744] rounded-3xl p-8 md:p-12 text-white mb-12 relative overflow-hidden">
-                <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[150%] bg-white/[0.03] rotate-12 pointer-events-none"></div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 relative z-10">
-                    <div>
-                        <div className="flex items-center gap-4 mb-6">
-                            <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center">
-                                <Briefcase size={24} className="text-yellow-400" />
+                    {/* Left Sidebar Profil Teks */}
+                    <aside className="w-full lg:w-[350px] flex-shrink-0 animate-fade-in z-10 lg:sticky lg:top-28">
+                        {/* Decorative Sidebar Image */}
+                        <div className="relative mb-10 w-full aspect-[4/3] max-w-[320px] mx-auto lg:mx-0 group cursor-pointer">
+                            <div className="absolute inset-0 bg-red-500 rounded-3xl transform -rotate-3 group-hover:-rotate-6 transition-transform duration-500 z-0"></div>
+                            <div className="absolute inset-0 bg-red-600 rounded-3xl transform rotate-3 group-hover:rotate-6 transition-transform duration-500 z-0 opacity-80"></div>
+                            <div className="absolute inset-2 bg-white rounded-2xl z-10 overflow-hidden shadow-lg shadow-black/10">
+                                <img
+                                    src="/nano_banana.png"
+                                    alt="Sumbawa Barat"
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                    onError={(e) => {
+                                        (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1541888045653-f7267eb4bd48?auto=format&fit=crop&q=80&w=600';
+                                    }}
+                                />
                             </div>
-                            <h2 className="text-2xl font-black">Tugas Pokok</h2>
                         </div>
-                        <p className="text-blue-100 leading-relaxed text-lg bg-white/5 p-6 rounded-xl border border-white/10">
-                            Menyelenggarakan administrasi kesekretariatan dan administrasi keuangan,
-                            mendukung pelaksanaan tugas dan fungsi DPRD, serta menyediakan dan mengoordinasikan
-                            tenaga ahli yang diperlukan oleh DPRD dalam melaksanakan fungsinya sesuai
-                            dengan kemampuan keuangan daerah.
-                        </p>
-                    </div>
 
-                    <div>
-                        <div className="flex items-center gap-4 mb-6">
-                            <div className="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center">
-                                <Layers size={24} className="text-yellow-400" />
+                        {/* Teks Visi, Misi, Dsb */}
+                        <div className="flex flex-col gap-8 text-[13px] md:text-[14px] text-gray-700 font-medium leading-relaxed pr-2">
+                            <div>
+                                <h3 className="text-gray-900 font-black text-lg mb-2">Visi</h3>
+                                <p>{visiText}</p>
                             </div>
-                            <h2 className="text-2xl font-black">Fungsi</h2>
+
+                            <div>
+                                <h3 className="text-gray-900 font-black text-lg mb-2">Misi</h3>
+                                <p>{misiText}</p>
+                            </div>
+
+                            <div>
+                                <h3 className="text-gray-900 font-black text-lg mb-2">Tugas</h3>
+                                <p>{tugasText}</p>
+                            </div>
+
+                            <div>
+                                <h3 className="text-gray-900 font-black text-lg mb-3">Fungsi</h3>
+                                <ul className="flex flex-col gap-3">
+                                    {fungsiList.map((item, idx) => (
+                                        <li key={idx} className="flex items-start gap-2.5 group">
+                                            <ChevronRight size={16} className="text-red-600 mt-0.5 shrink-0 group-hover:translate-x-1 transition-transform" />
+                                            <span>{item}</span>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
                         </div>
-                        <div className="space-y-4">
-                            {[
-                                "Penyelenggaraan administrasi kesekretariatan DPRD.",
-                                "Penyelenggaraan administrasi keuangan DPRD.",
-                                "Fasilitasi penyelenggaraan rapat DPRD.",
-                                "Penyediaan dan pengoordinasian tenaga ahli yang diperlukan."
-                            ].map((fungsi, index) => (
-                                <div key={index} className="flex items-center gap-3 bg-white/5 p-4 rounded-xl border border-white/10 hover:bg-white/10 transition-colors">
-                                    <ChevronRight size={18} className="text-yellow-400 shrink-0" />
-                                    <span className="text-blue-50 font-medium">{fungsi}</span>
+                    </aside>
+
+                    {/* Right Main Content */}
+                    <section className="flex-1 w-full lg:mt-6 animate-fade-in">
+                        <h1 className="text-3xl md:text-5xl font-black text-gray-900 mb-16 tracking-tight text-center lg:text-left">
+                            Sekretariat DPRD
+                        </h1>
+
+                        <div className="w-full flex flex-col items-center">
+                            {/* Pusat (Sekretaris) */}
+                            <div className="flex justify-center w-full mb-16">
+                                <div className="w-[180px] md:w-[220px]">
+                                    {renderProfileCard(sekretariatData.sekretaris)}
                                 </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </div>
+                            </div>
 
-            {/* Struktur Organisasi Section */}
-            <div className="mb-12">
-                <div className="text-center mb-10">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-[#0a2744]/5 rounded-full mb-4">
-                        <Users size={32} className="text-[#0a2744]" />
-                    </div>
-                    <h2 className="text-3xl font-black text-[#0a2744] mb-2">Struktur Organisasi</h2>
-                    <p className="text-gray-500 max-w-2xl mx-auto">
-                        Susunan organisasi Sekretariat DPRD Kabupaten Sumbawa Barat untuk mendukung efektivitas dan efisiensi pelayanan.
-                    </p>
-                </div>
-
-                {/* Tree Structure */}
-                <div className="max-w-4xl mx-auto relative pt-8 pb-12">
-                    {/* Level 1: Sekretaris */}
-                    <div className="flex justify-center mb-12 relative">
-                        <div className="bg-[#0a2744] text-white px-8 py-4 rounded-xl shadow-lg border-b-4 border-yellow-500 z-10 w-64 text-center">
-                            <p className="text-xs text-blue-200 font-semibold mb-1 uppercase tracking-wider">Pimpinan</p>
-                            <h3 className="font-black text-lg">Sekretaris DPRD</h3>
-                        </div>
-                        {/* Connecting line down from Sekretaris */}
-                        <div className="absolute h-12 w-0.5 bg-gray-300 top-full left-1/2 -translate-x-1/2"></div>
-                    </div>
-
-                    {/* Level 2: Bagian-bagian */}
-                    <div className="relative">
-                        {/* Horizontal connecting line */}
-                        <div className="absolute top-[-48px] left-[15%] right-[15%] h-0.5 bg-gray-300"></div>
-
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                            {/* Bagian Umum */}
-                            <div className="relative flex flex-col items-center">
-                                {/* Vertical line up */}
-                                <div className="absolute h-12 w-0.5 bg-gray-300 bottom-full left-1/2 -translate-x-1/2 md:block hidden"></div>
-                                <div className="bg-white border text-center border-gray-200 p-6 rounded-xl shadow-sm hover:shadow-md transition-all hover:border-blue-400 w-full group">
-                                    <div className="w-10 h-10 bg-blue-50 text-blue-600 rounded-lg flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
-                                        <Layers size={20} />
+                            {/* Grid Pegawai / Kasubbag - 2 Columns mobile, 4 desktop */}
+                            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-x-4 gap-y-8 sm:gap-x-6 sm:gap-y-10 lg:gap-x-8 lg:gap-y-12 w-full">
+                                {sekretariatData.staff.map((person, idx) => (
+                                    <div key={idx} className="w-full flex justify-center">
+                                        {renderProfileCard(person)}
                                     </div>
-                                    <h4 className="font-bold text-[#0a2744]">Bagian Umum & Keuangan</h4>
-                                    <p className="text-xs text-gray-500 mt-2">Mengelola administrasi ketatausahaan, kepegawaian, perlengkapan dan keuangan.</p>
-                                </div>
-                            </div>
-
-                            {/* Bagian Fasilitasi */}
-                            <div className="relative flex flex-col items-center">
-                                <div className="absolute h-12 w-0.5 bg-gray-300 bottom-full left-1/2 -translate-x-1/2 hidden md:block"></div>
-                                <div className="bg-white border text-center border-gray-200 p-6 rounded-xl shadow-sm hover:shadow-md transition-all hover:border-yellow-400 w-full group">
-                                    <div className="w-10 h-10 bg-yellow-50 text-yellow-600 rounded-lg flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
-                                        <Target size={20} />
-                                    </div>
-                                    <h4 className="font-bold text-[#0a2744]">Bagian Fasilitasi Penganggaran & Pengawasan</h4>
-                                    <p className="text-xs text-gray-500 mt-2">Memfasilitasi kegiatan penganggaran dan pengawasan dewan.</p>
-                                </div>
-                            </div>
-
-                            {/* Bagian Persidangan */}
-                            <div className="relative flex flex-col items-center">
-                                <div className="absolute h-12 w-0.5 bg-gray-300 bottom-full left-1/2 -translate-x-1/2 hidden md:block"></div>
-                                <div className="bg-white border text-center border-gray-200 p-6 rounded-xl shadow-sm hover:shadow-md transition-all hover:border-green-400 w-full group">
-                                    <div className="w-10 h-10 bg-green-50 text-green-600 rounded-lg flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
-                                        <Briefcase size={20} />
-                                    </div>
-                                    <h4 className="font-bold text-[#0a2744]">Bagian Persidangan & Perundang-undangan</h4>
-                                    <p className="text-xs text-gray-500 mt-2">Menyiapkan rapat-rapat, risalah, produk hukum dan humas.</p>
-                                </div>
+                                ))}
                             </div>
                         </div>
-                    </div>
+                    </section>
                 </div>
             </div>
-
         </main>
     );
 };

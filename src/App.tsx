@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import BeritaPage from './pages/BeritaPage';
+import BeritaDetailPage from './pages/BeritaDetailPage';
 import PimpinanPage from './pages/PimpinanPage';
 import AKDPage from './pages/AKDPage';
 import SekretariatPage from './pages/SekretariatPage';
@@ -57,7 +58,7 @@ function App() {
         {/* Public Routes (with Header/Footer) */}
         <Route path="/" element={<PublicLayout><HomePage /></PublicLayout>} />
         <Route path="/berita" element={<PublicLayout><BeritaPage /></PublicLayout>} />
-        <Route path="/berita/:slug" element={<PublicLayout><BeritaPage /></PublicLayout>} />
+        <Route path="/berita/:slug" element={<PublicLayout><BeritaDetailPage /></PublicLayout>} />
         <Route path="/pimpinan" element={<PublicLayout><PimpinanPage /></PublicLayout>} />
         <Route path="/akd" element={<PublicLayout><AKDPage /></PublicLayout>} />
         <Route path="/akd/:slug" element={<PublicLayout><AKDPage /></PublicLayout>} />

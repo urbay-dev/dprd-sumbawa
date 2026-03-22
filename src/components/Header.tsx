@@ -116,16 +116,29 @@ const Header: React.FC = () => {
 
                                 {/* Desktop Dropdown Menu */}
                                 {item.children && openDropdown === item.label && (
-                                    <div className="absolute top-full left-0 mt-2 bg-zinc-800 shadow-xl border border-white/10 min-w-[200px] z-50 rounded-lg overflow-hidden">
-                                        {item.children.map((child) => (
-                                            <Link
-                                                key={child.label}
-                                                to={child.href}
-                                                className="block px-4 py-3 text-sm font-medium text-gray-200 hover:bg-zinc-700 hover:text-white transition-colors"
-                                            >
-                                                {child.label}
-                                            </Link>
-                                        ))}
+                                    <div className="absolute top-full left-0 pt-5 z-50">
+                                        <div className="bg-white shadow-[0_10px_40px_rgba(0,0,0,0.1)] min-w-[260px] rounded-md border border-gray-100 relative animate-in fade-in slide-in-from-top-2 duration-200">
+                                            {/* Caret/Triangle indicator */}
+                                            <div className="absolute -top-[7px] left-6 w-3.5 h-3.5 bg-white border-t border-l border-gray-100 transform rotate-45 rounded-sm pointer-events-none z-0"></div>
+
+                                            <div className="relative z-10 bg-white rounded-md py-1.5 flex flex-col">
+                                                {item.children.map((child) => {
+                                                    const isChildActive = location.pathname === child.href;
+                                                    return (
+                                                        <Link
+                                                            key={child.label}
+                                                            to={child.href}
+                                                            className={`block px-5 py-3 text-[13px] font-bold transition-all border-l-4 ${isChildActive
+                                                                    ? 'bg-gray-100 text-gray-900 border-red-600'
+                                                                    : 'border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900 hover:border-red-400'
+                                                                }`}
+                                                        >
+                                                            {child.label}
+                                                        </Link>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
                                     </div>
                                 )}
                             </div>

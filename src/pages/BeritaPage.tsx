@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { ChevronRight, ArrowRight } from 'lucide-react';
 import { fetchBerita } from '../services/api';
 import type { Berita } from '../services/api';
 
@@ -13,9 +14,10 @@ const BeritaPage: React.FC = () => {
 
     useEffect(() => {
         setLoading(true);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         Promise.all([
             fetchBerita({ limit, page, isPublished: true }),
-            fetchBerita({ limit: 5, page: 1, isPublished: true }),
+            fetchBerita({ limit: 6, page: 1, isPublished: true }),
         ]).then(([mainRes, latestRes]) => {
             setBeritaList(mainRes.data);
             setTotal(mainRes.total);
@@ -23,7 +25,7 @@ const BeritaPage: React.FC = () => {
         }).finally(() => setLoading(false));
     }, [page]);
 
-    const totalPages = Math.ceil(total / limit);
+    const totalPages = Math.ceil(total / Math.max(limit, 1));
 
     const formatDate = (dateStr: string) => {
         return new Date(dateStr).toLocaleDateString('id-ID', {
@@ -32,129 +34,179 @@ const BeritaPage: React.FC = () => {
     };
 
     return (
-        <main className="max-w-[1200px] mx-auto px-4 sm:px-6 py-10 md:py-16">
-            <div className="flex flex-col lg:flex-row gap-12 xl:gap-20">
+        <main className="min-h-screen bg-[#fcfcfc] py-12 md:py-20">
+            <div className="max-w-[1400px] mx-auto px-4 md:px-8">
+                <div className="flex flex-col-reverse lg:flex-row gap-12 lg:gap-20 items-start">
 
-                {/* Left Sidebar */}
-                <aside className="w-full lg:w-[280px] xl:w-[320px] flex-shrink-0">
-                    {/* Decorative Image container */}
-                    <div className="relative mb-14 w-full max-w-[320px] mx-auto lg:mx-0 p-4">
-                        <div className="absolute inset-0 bg-[#e86666] rounded-[24px] transform -rotate-2 scale-100 opacity-90 z-0" style={{ borderRadius: '30px 10px 40px 15px' }}></div>
-                        <div className="absolute inset-2 bg-[#d14b4f] rounded-[20px] transform rotate-3 scale-105 opacity-80 z-0"></div>
-                        <img
-                            src="/nano_banana.png"
-                            alt="Sidebar Dekorasi"
-                            className="relative w-full aspect-[4/3] object-cover rounded-lg shadow-sm z-10 border-2 border-white/50"
-                        />
-                    </div>
-
-                    {/* Latest News Widget */}
-                    <div>
-                        <h3 className="font-bold text-[16px] text-black border-b border-gray-100 pb-3 mb-4">
-                            Update Berita Terakhir
-                        </h3>
-                        <div className="flex flex-col">
-                            {loading
-                                ? Array(5).fill(0).map((_, i) => (
-                                    <div key={i} className="py-3.5 border-b border-gray-100">
-                                        <div className="h-3 bg-gray-100 animate-pulse rounded w-full mb-1" />
-                                        <div className="h-3 bg-gray-100 animate-pulse rounded w-3/4" />
-                                    </div>
-                                ))
-                                : latestNews.map((news) => (
-                                    <Link to={`/berita/${news.slug}`} key={news.id} className="py-3.5 border-b border-gray-100 last:border-0 group">
-                                        <h4 className="text-[13px] leading-relaxed text-gray-500 group-hover:text-red-600 transition-colors">
-                                            {news.title}
-                                        </h4>
-                                    </Link>
-                                ))
-                            }
+                    {/* LEFT SIDEBAR */}
+                    <aside className="w-full lg:w-[350px] flex-shrink-0 lg:sticky lg:top-28">
+                        {/* Decorative Image */}
+                        <div className="relative mb-10 lg:mb-14 w-full aspect-[4/3] max-w-[320px] mx-auto lg:mx-0 group cursor-pointer">
+                            <div className="absolute inset-0 bg-red-500 rounded-3xl transform -rotate-3 group-hover:-rotate-6 transition-transform duration-500 z-0"></div>
+                            <div className="absolute inset-0 bg-red-600 rounded-3xl transform rotate-3 group-hover:rotate-6 transition-transform duration-500 z-0 opacity-80"></div>
+                            <div className="absolute inset-2 bg-white rounded-2xl z-10 overflow-hidden shadow-lg shadow-black/10">
+                                <img
+                                    src="/nano_banana.png"
+                                    alt="Sidebar Dekorasi"
+                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                    onError={(e) => {
+                                        (e.currentTarget as HTMLImageElement).src = 'https://images.unsplash.com/photo-1541888045653-f7267eb4bd48?auto=format&fit=crop&q=80&w=600';
+                                    }}
+                                />
+                            </div>
                         </div>
-                    </div>
-                </aside>
 
-                {/* Right Content */}
-                <section className="flex-1">
-                    <h1 className="text-3xl lg:text-[34px] font-serif font-extrabold text-[#222] mb-10 tracking-tight">
-                        Arsip Berita
-                    </h1>
+                        {/* Latest News */}
+                        <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                            <h3 className="font-black text-xl text-gray-900 mb-2 tracking-tight">
+                                Update Berita Terakhir
+                            </h3>
+                            <div className="w-12 h-1 bg-red-600 mb-6"></div>
 
-                    {loading ? (
-                        <div className="flex flex-col gap-8">
-                            {Array(4).fill(0).map((_, i) => (
-                                <div key={i} className="flex flex-col sm:flex-row gap-5 items-start">
-                                    <div className="w-full sm:w-[120px] h-[90px] bg-gray-100 animate-pulse rounded flex-shrink-0" />
-                                    <div className="flex-1 space-y-2">
-                                        <div className="h-4 bg-gray-100 animate-pulse rounded w-3/4" />
-                                        <div className="h-3 bg-gray-100 animate-pulse rounded w-1/4" />
-                                        <div className="h-3 bg-gray-100 animate-pulse rounded w-full" />
-                                    </div>
-                                </div>
-                            ))}
+                            <div className="flex flex-col">
+                                {loading && latestNews.length === 0
+                                    ? Array(5).fill(0).map((_, i) => (
+                                        <div key={i} className="py-4 border-b border-gray-50">
+                                            <div className="h-4 bg-gray-100 animate-pulse rounded w-full mb-2" />
+                                            <div className="h-4 bg-gray-100 animate-pulse rounded w-3/4" />
+                                        </div>
+                                    ))
+                                    : latestNews.map((news) => (
+                                        <Link
+                                            to={`/berita/${news.slug}`}
+                                            key={news.id}
+                                            className="group py-4 border-b border-gray-100 last:border-0 flex gap-3 items-start"
+                                        >
+                                            <div className="flex-1">
+                                                <h4 className="text-sm font-semibold text-gray-700 leading-snug group-hover:text-red-600 transition-colors">
+                                                    {news.title}
+                                                </h4>
+                                                <p className="text-[11px] text-gray-400 mt-1.5 uppercase tracking-wider font-medium">
+                                                    {formatDate(news.publishedAt)}
+                                                </p>
+                                            </div>
+                                            <ChevronRight size={16} className="text-gray-300 mt-0.5 group-hover:text-red-600 group-hover:translate-x-1 transition-all shrink-0" />
+                                        </Link>
+                                    ))
+                                }
+                            </div>
                         </div>
-                    ) : beritaList.length === 0 ? (
-                        <div className="text-center py-16 text-gray-400">
-                            <p className="text-lg font-medium">Belum ada berita.</p>
-                            <p className="text-sm mt-1">Silakan tambahkan berita melalui panel admin.</p>
-                        </div>
-                    ) : (
-                        <div className="flex flex-col gap-8">
-                            {beritaList.map((news) => (
-                                <div key={news.id} className="flex flex-col sm:flex-row gap-5 items-start">
-                                    {/* Article Image */}
-                                    <div className="w-full sm:w-[120px] flex-shrink-0">
-                                        <img
-                                            src={news.imageUrl || 'https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=600&q=80'}
-                                            alt={news.title}
-                                            className="w-full h-[180px] sm:h-[90px] object-cover rounded shadow-sm hover:opacity-90 transition-opacity"
-                                            style={{ aspectRatio: '4/3' }}
-                                        />
-                                    </div>
+                    </aside>
 
-                                    {/* Article Info */}
-                                    <div className="flex-1">
-                                        <h2 className="text-[15px] sm:text-[16px] font-bold text-black leading-snug mb-1.5 hover:text-red-600 cursor-pointer">
-                                            {news.title}
-                                        </h2>
-                                        <p className="text-[11px] text-gray-400 mb-2 uppercase tracking-wide font-medium">
-                                            {formatDate(news.publishedAt)}
-                                        </p>
-                                        <p className="text-[13px] text-gray-600 leading-relaxed font-normal">
-                                            {news.excerpt}
-                                            <Link to={`/berita/${news.slug}`} className="text-[#db2c2c] hover:text-red-700 ml-1.5 font-medium transition-colors">
-                                                Baca Berita
+                    {/* RIGHT CONTENT: Arsip Berita */}
+                    <section className="flex-1 w-full">
+                        <div className="mb-10 flex flex-col">
+                            <h1 className="text-3xl md:text-4xl font-black text-gray-900 tracking-tight">
+                                Arsip Berita
+                            </h1>
+                            <div className="w-20 h-1.5 bg-red-600 mt-4 rounded-full"></div>
+                        </div>
+
+                        {loading && beritaList.length === 0 ? (
+                            <div className="flex flex-col gap-6">
+                                {Array(4).fill(0).map((_, i) => (
+                                    <div key={i} className="flex flex-col sm:flex-row gap-6 p-4 rounded-xl border border-gray-50 bg-white">
+                                        <div className="w-full sm:w-48 aspect-video sm:aspect-square bg-gray-100 animate-pulse rounded-lg flex-shrink-0" />
+                                        <div className="flex-1 space-y-4 py-2">
+                                            <div className="h-6 bg-gray-100 animate-pulse rounded-md w-3/4" />
+                                            <div className="h-4 bg-gray-100 animate-pulse rounded-md w-1/4" />
+                                            <div className="space-y-2">
+                                                <div className="h-3 bg-gray-100 animate-pulse rounded w-full" />
+                                                <div className="h-3 bg-gray-100 animate-pulse rounded w-4/5" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        ) : beritaList.length === 0 ? (
+                            <div className="text-center py-24 bg-white rounded-2xl border border-gray-100 shadow-sm">
+                                <p className="text-xl font-bold text-gray-400">Belum ada berita dipublikasikan.</p>
+                            </div>
+                        ) : (
+                            <div className="flex flex-col gap-6">
+                                {beritaList.map((news) => (
+                                    <div key={news.id} className="group flex flex-col sm:flex-row gap-6 p-4 rounded-xl border border-transparent hover:border-gray-100 hover:shadow-lg bg-white transition-all duration-300 items-start">
+
+                                        {/* Image */}
+                                        <div className="w-full sm:w-48 flex-shrink-0 overflow-hidden rounded-lg aspect-video sm:aspect-square shadow-sm">
+                                            <img
+                                                src={news.imageUrl || 'https://images.unsplash.com/photo-1529070538774-1843cb3265df?w=800&q=80'}
+                                                alt={news.title}
+                                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                            />
+                                        </div>
+
+                                        {/* Content */}
+                                        <div className="flex-1 flex flex-col py-1">
+                                            <Link to={`/berita/${news.slug}`}>
+                                                <h2 className="text-lg md:text-xl font-bold text-gray-900 leading-snug mb-2 group-hover:text-red-600 transition-colors">
+                                                    {news.title}
+                                                </h2>
                                             </Link>
-                                        </p>
+                                            <p className="text-xs text-gray-400 mb-3 font-semibold tracking-wide uppercase">
+                                                {formatDate(news.publishedAt)}
+                                            </p>
+                                            <p className="text-sm text-gray-600 leading-relaxed line-clamp-2 md:line-clamp-3 mb-4">
+                                                {news.excerpt}
+                                            </p>
+
+                                            <div className="mt-auto">
+                                                <Link
+                                                    to={`/berita/${news.slug}`}
+                                                    className="inline-flex items-center gap-1.5 text-red-600 font-bold text-sm group-hover:underline tracking-wide"
+                                                >
+                                                    Baca Berita <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
+                                                </Link>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            ))}
-                        </div>
-                    )}
+                                ))}
+                            </div>
+                        )}
 
-                    {/* Pagination */}
-                    {totalPages > 1 && (
-                        <div className="mt-14 mb-8 flex items-center justify-start text-[13px] text-gray-700 font-medium gap-1 flex-wrap">
-                            {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => i + 1).map((p) => (
-                                <button
-                                    key={p}
-                                    onClick={() => setPage(p)}
-                                    className={`w-8 h-8 rounded flex items-center justify-center cursor-pointer transition-colors ${p === page ? 'bg-primary text-white' : 'hover:text-red-600'
-                                        }`}
-                                >
-                                    {p}
-                                </button>
-                            ))}
-                            {totalPages > 5 && <span className="mx-1 text-gray-500 tracking-widest">...</span>}
-                            {totalPages > 5 && (
-                                <button onClick={() => setPage(totalPages)} className="cursor-pointer hover:text-red-600">{totalPages}</button>
-                            )}
-                            {page < totalPages && (
-                                <button onClick={() => setPage(p => p + 1)} className="ml-2 cursor-pointer text-gray-800 hover:text-red-600">Next &gt;</button>
-                            )}
-                        </div>
-                    )}
-                </section>
+                        {/* Pagination Component */}
+                        {totalPages > 1 && (
+                            <div className="mt-16 flex items-center justify-start gap-2 border-t border-gray-200 pt-8">
+                                {Array.from({ length: Math.min(totalPages, 5) }, (_, i) => i + 1).map((p) => (
+                                    <button
+                                        key={p}
+                                        onClick={() => setPage(p)}
+                                        className={`w-10 h-10 rounded-lg flex items-center justify-center text-sm font-bold transition-all ${p === page
+                                            ? 'bg-red-600 text-white shadow-md shadow-red-600/30'
+                                            : 'bg-white text-gray-600 border border-gray-200 hover:border-red-600 hover:text-red-600'
+                                            }`}
+                                    >
+                                        {p}
+                                    </button>
+                                ))}
 
+                                {totalPages > 5 && <span className="mx-2 text-gray-400 tracking-widest font-bold">...</span>}
+
+                                {totalPages > 5 && (
+                                    <button
+                                        onClick={() => setPage(totalPages)}
+                                        className={`w-10 h-10 rounded-lg flex items-center justify-center text-sm font-bold transition-all ${page === totalPages
+                                            ? 'bg-red-600 text-white shadow-md'
+                                            : 'bg-white text-gray-600 border border-gray-200 hover:border-red-600 hover:text-red-600'
+                                            }`}
+                                    >
+                                        {totalPages}
+                                    </button>
+                                )}
+
+                                {page < totalPages && (
+                                    <button
+                                        onClick={() => setPage(p => p + 1)}
+                                        className="ml-4 flex items-center gap-2 text-sm font-bold text-gray-600 hover:text-red-600 transition-colors"
+                                    >
+                                        Next <ChevronRight size={16} />
+                                    </button>
+                                )}
+                            </div>
+                        )}
+
+                    </section>
+                </div>
             </div>
         </main>
     );
