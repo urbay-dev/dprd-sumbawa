@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
@@ -7,6 +7,14 @@ import BeritaPage from './pages/BeritaPage';
 import PimpinanPage from './pages/PimpinanPage';
 import AKDPage from './pages/AKDPage';
 import SekretariatPage from './pages/SekretariatPage';
+
+// Admin Pages
+import AdminLoginPage from './pages/admin/AdminLoginPage';
+import AdminDashboardPage from './pages/admin/AdminDashboardPage';
+import AdminBeritaPage from './pages/admin/AdminBeritaPage';
+import AdminBannerPage from './pages/admin/AdminBannerPage';
+import AdminPimpinanPage from './pages/admin/AdminPimpinanPage';
+import AdminUsersPage from './pages/admin/AdminUsersPage';
 
 // Generic placeholder page for unbuilt pages
 const PlaceholderPage: React.FC<{ title: string }> = ({ title }) => (
@@ -22,41 +30,56 @@ const PlaceholderPage: React.FC<{ title: string }> = ({ title }) => (
   </main>
 );
 
+// Public layout wrapper (with Header + Footer)
+const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div className="min-h-screen flex flex-col bg-gray-100">
+    <Header />
+    <div className="flex-1">{children}</div>
+    <Footer />
+  </div>
+);
+
 import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100">
-      <Header />
-      <div className="flex-1">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/berita" element={<BeritaPage />} />
-          <Route path="/berita/:slug" element={<BeritaPage />} />
-          <Route path="/pimpinan" element={<PimpinanPage />} />
-          <Route path="/akd" element={<AKDPage />} />
-          <Route path="/akd/:slug" element={<AKDPage />} />
-          <Route path="/fraksi" element={<PlaceholderPage title="Fraksi DPRD" />} />
-          <Route path="/fraksi/:slug" element={<PlaceholderPage title="Fraksi" />} />
-          <Route path="/sekretariat" element={<SekretariatPage />} />
-          <Route path="/ppid" element={<PlaceholderPage title="PPID - Keterbukaan Informasi Publik" />} />
-          <Route path="/ppid/:slug" element={<PlaceholderPage title="PPID" />} />
-          <Route path="/agenda" element={<PlaceholderPage title="Agenda Kegiatan" />} />
-          <Route path="/galeri" element={<PlaceholderPage title="Galeri Foto" />} />
-          <Route path="/video" element={<PlaceholderPage title="Berita Video" />} />
-          <Route path="/forum" element={<PlaceholderPage title="Forum Warga" />} />
-          <Route path="/renstra" element={<PlaceholderPage title="Renstra DPRD" />} />
-          <Route path="/prolegda" element={<PlaceholderPage title="Program Legislasi Daerah" />} />
-          <Route path="/delegasi" element={<PlaceholderPage title="Delegasi Masyarakat" />} />
-          <Route path="/ereses" element={<PlaceholderPage title="eReses - Reses Anggota Dewan" />} />
-          <Route path="/jdih" element={<PlaceholderPage title="JDIH - Jaringan Dokumentasi Hukum" />} />
-          <Route path="/portal" element={<PlaceholderPage title="Portal Sumbawa Barat" />} />
-          <Route path="*" element={<PlaceholderPage title="404 - Halaman Tidak Ditemukan" />} />
-        </Routes>
-      </div>
-      <Footer />
+    <>
+      <Routes>
+        {/* Admin Routes (no Header/Footer) */}
+        <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
+        <Route path="/admin/login" element={<AdminLoginPage />} />
+        <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+        <Route path="/admin/berita" element={<AdminBeritaPage />} />
+        <Route path="/admin/banner" element={<AdminBannerPage />} />
+        <Route path="/admin/pimpinan" element={<AdminPimpinanPage />} />
+        <Route path="/admin/users" element={<AdminUsersPage />} />
+
+        {/* Public Routes (with Header/Footer) */}
+        <Route path="/" element={<PublicLayout><HomePage /></PublicLayout>} />
+        <Route path="/berita" element={<PublicLayout><BeritaPage /></PublicLayout>} />
+        <Route path="/berita/:slug" element={<PublicLayout><BeritaPage /></PublicLayout>} />
+        <Route path="/pimpinan" element={<PublicLayout><PimpinanPage /></PublicLayout>} />
+        <Route path="/akd" element={<PublicLayout><AKDPage /></PublicLayout>} />
+        <Route path="/akd/:slug" element={<PublicLayout><AKDPage /></PublicLayout>} />
+        <Route path="/fraksi" element={<PublicLayout><PlaceholderPage title="Fraksi DPRD" /></PublicLayout>} />
+        <Route path="/fraksi/:slug" element={<PublicLayout><PlaceholderPage title="Fraksi" /></PublicLayout>} />
+        <Route path="/sekretariat" element={<PublicLayout><SekretariatPage /></PublicLayout>} />
+        <Route path="/ppid" element={<PublicLayout><PlaceholderPage title="PPID - Keterbukaan Informasi Publik" /></PublicLayout>} />
+        <Route path="/ppid/:slug" element={<PublicLayout><PlaceholderPage title="PPID" /></PublicLayout>} />
+        <Route path="/agenda" element={<PublicLayout><PlaceholderPage title="Agenda Kegiatan" /></PublicLayout>} />
+        <Route path="/galeri" element={<PublicLayout><PlaceholderPage title="Galeri Foto" /></PublicLayout>} />
+        <Route path="/video" element={<PublicLayout><PlaceholderPage title="Berita Video" /></PublicLayout>} />
+        <Route path="/forum" element={<PublicLayout><PlaceholderPage title="Forum Warga" /></PublicLayout>} />
+        <Route path="/renstra" element={<PublicLayout><PlaceholderPage title="Renstra DPRD" /></PublicLayout>} />
+        <Route path="/prolegda" element={<PublicLayout><PlaceholderPage title="Program Legislasi Daerah" /></PublicLayout>} />
+        <Route path="/delegasi" element={<PublicLayout><PlaceholderPage title="Delegasi Masyarakat" /></PublicLayout>} />
+        <Route path="/ereses" element={<PublicLayout><PlaceholderPage title="eReses - Reses Anggota Dewan" /></PublicLayout>} />
+        <Route path="/jdih" element={<PublicLayout><PlaceholderPage title="JDIH - Jaringan Dokumentasi Hukum" /></PublicLayout>} />
+        <Route path="/portal" element={<PublicLayout><PlaceholderPage title="Portal Sumbawa Barat" /></PublicLayout>} />
+        <Route path="*" element={<PublicLayout><PlaceholderPage title="404 - Halaman Tidak Ditemukan" /></PublicLayout>} />
+      </Routes>
       <Analytics />
-    </div>
+    </>
   );
 }
 

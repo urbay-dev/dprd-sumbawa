@@ -79,12 +79,12 @@ const Header: React.FC = () => {
     }, [location.pathname]);
 
     return (
-        <header className={`sticky top-0 z-50 bg-[#0a2744] transition-all duration-300 ${isScrolled ? 'shadow-xl' : ''}`}>
+        <header className={`sticky top-0 z-50 bg-zinc-900 transition-all duration-300 ${isScrolled ? 'shadow-xl' : ''}`}>
             <div className="px-4 lg:px-6 h-16 xl:h-20 flex items-center justify-between">
 
                 {/* Left: Logo & Title */}
                 <Link to="/" className="flex items-center gap-3 shrink-0 mr-2 xl:mr-4">
-                    <div className="w-10 h-10 xl:w-12 xl:h-12 rounded-full bg-[#0a2744] flex flex-col items-center justify-center border-2 border-yellow-500 shadow-sm shrink-0">
+                    <div className="w-10 h-10 xl:w-12 xl:h-12 rounded-full bg-zinc-900 flex flex-col items-center justify-center border border-yellow-500 shadow-sm shrink-0">
                         <span className="text-yellow-400 font-black text-[10px] xl:text-xs leading-none">DPRD</span>
                     </div>
                     <div className="text-white font-black text-xs md:text-sm lg:text-base xl:text-lg uppercase tracking-wider hidden sm:block">
@@ -106,9 +106,9 @@ const Header: React.FC = () => {
                             >
                                 <Link
                                     to={item.href}
-                                    className={`flex items-center gap-1 text-[11px] xl:text-[13px] font-bold px-2 xl:px-3 py-1.5 xl:py-2 rounded-md transition-all whitespace-nowrap ${isActive
-                                        ? 'bg-[#e0e0e0] text-[#1a1a1a] rounded-md shadow-sm'
-                                        : 'text-gray-200 hover:text-white hover:bg-white/10 rounded-md'
+                                    className={`flex items-center gap-1 text-[11px] xl:text-[13px] font-bold px-3 py-1.5 xl:py-2 rounded transition-all whitespace-nowrap ${isActive
+                                        ? 'bg-white text-black shadow-sm'
+                                        : 'text-gray-300 hover:text-white hover:bg-white/10'
                                         }`}
                                 >
                                     {item.label}
@@ -116,12 +116,12 @@ const Header: React.FC = () => {
 
                                 {/* Desktop Dropdown Menu */}
                                 {item.children && openDropdown === item.label && (
-                                    <div className="absolute top-full left-0 mt-2 bg-[#1a3a5c] shadow-xl border border-white/5 min-w-[200px] z-50 rounded-lg overflow-hidden">
+                                    <div className="absolute top-full left-0 mt-2 bg-zinc-800 shadow-xl border border-white/10 min-w-[200px] z-50 rounded-lg overflow-hidden">
                                         {item.children.map((child) => (
                                             <Link
                                                 key={child.label}
                                                 to={child.href}
-                                                className="block px-4 py-3 text-sm font-medium text-gray-200 hover:bg-[#254d77] hover:text-white transition-colors"
+                                                className="block px-4 py-3 text-sm font-medium text-gray-200 hover:bg-zinc-700 hover:text-white transition-colors"
                                             >
                                                 {child.label}
                                             </Link>
@@ -158,7 +158,7 @@ const Header: React.FC = () => {
             </div>
 
             {/* Mobile Nav */}
-            <div className={`lg:hidden bg-[#0a2744] border-t border-white/10 overflow-hidden transition-all duration-300 ease-in-out ${mobileOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0'}`}>
+            <div className={`lg:hidden bg-zinc-900 border-t border-white/10 overflow-hidden transition-all duration-300 ease-in-out ${mobileOpen ? 'max-h-[80vh] opacity-100' : 'max-h-0 opacity-0'}`}>
                 {/* Mobile Search */}
                 <div className="p-4 border-b border-white/5 md:hidden">
                     <div className="relative">
@@ -196,7 +196,7 @@ const Header: React.FC = () => {
                                 )}
                             </div>
                             {/* Mobile Dropdown */}
-                            <div className={`bg-[#061d33] overflow-hidden transition-all duration-300 ${openDropdown === item.label ? 'max-h-[800px]' : 'max-h-0'}`}>
+                            <div className={`bg-black overflow-hidden transition-all duration-300 ${openDropdown === item.label ? 'max-h-[800px]' : 'max-h-0'}`}>
                                 {item.children?.map((child) => (
                                     <Link
                                         key={child.label}
