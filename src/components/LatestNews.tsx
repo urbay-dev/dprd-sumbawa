@@ -111,7 +111,7 @@ const LatestNews: React.FC = () => {
                             POPULER
                         </div>
                         <div className="flex flex-col gap-4">
-                            {textNews.map((news, index) => (
+                            {textNews.map((news) => (
                                 <Link to="/berita" key={`populer-${news.id}`} className="group cursor-pointer border-b border-gray-100 pb-3 last:border-0">
                                     <h3 className="text-xs font-bold text-gray-800 leading-snug group-hover:text-red-600 transition-colors">
                                         {news.title}

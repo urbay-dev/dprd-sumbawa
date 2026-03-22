@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 const years = [
     "Kinerja per Akhir Tahun 2026",
