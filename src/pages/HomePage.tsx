@@ -5,6 +5,7 @@ import VideoNews from '../components/VideoNews';
 import FokusSection from '../components/FokusSection';
 import KinerjaMagazineInfo from '../components/KinerjaMagazineInfo';
 import AgendaForumTautan from '../components/AgendaForumTautan';
+import InstagramSection from '../components/InstagramSection';
 
 const HomePage: React.FC = () => {
     return (
@@ -26,8 +27,12 @@ const HomePage: React.FC = () => {
 
             {/* 6. Agenda / Forum Warga / Tautan */}
             <AgendaForumTautan />
+
+            {/* 7. Instagram Feed */}
+            <InstagramSection />
         </main>
     );
 };
 
 export default HomePage;
+

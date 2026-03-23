@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, ArrowRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { fetchBanners } from '../services/api';
 import type { Banner } from '../services/api';
 
@@ -79,49 +79,22 @@ const HeroCarousel: React.FC = () => {
                     className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${index === current ? 'opacity-100 z-10' : 'opacity-0 z-0'
                         }`}
                 >
+                    {/* Background Image Wrapping Anchor */}
+                    <a
+                        href={slide.linkUrl || "#"}
+                        className="absolute inset-0 z-20"
+                        onClick={(e) => !slide.linkUrl && e.preventDefault()}
+                        style={{ cursor: slide.linkUrl ? 'pointer' : 'default' }}
+                    >
+                        <span className="sr-only">{slide.title}</span>
+                    </a>
+
                     {/* Background Image with slow zoom (Ken Burns effect) */}
                     <div
                         className={`absolute inset-0 bg-cover bg-center transition-transform duration-[10000ms] ease-linear ${index === current ? 'scale-110' : 'scale-100'
                             }`}
                         style={{ backgroundImage: `url('${slide.imageUrl}')` }}
                     />
-
-                    {/* Gradient Overlay for Text Readability - adjusts for mobile vs desktop */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0a2744]/95 via-[#0A2744]/60 to-transparent md:bg-gradient-to-r md:from-[#0a2744]/95 md:via-[#0a2744]/70 md:to-transparent/30" />
-
-                    {/* Content Container */}
-                    <div className="absolute inset-0 z-30 flex flex-col justify-end p-6 md:p-12 lg:p-20 max-w-5xl">
-                        <div
-                            className={`transition-all duration-1000 delay-300 transform ${index === current ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
-                                }`}
-                        >
-                            {slide.category && (
-                                <span className="inline-block px-4 py-1.5 mb-4 text-xs md:text-sm font-bold tracking-widest text-[#0a2744] uppercase bg-yellow-400 rounded-full shadow-lg backdrop-blur-sm">
-                                    {slide.category}
-                                </span>
-                            )}
-
-                            <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-4 drop-shadow-xl">
-                                {slide.title}
-                            </h1>
-
-                            {slide.subtitle && (
-                                <p className="text-base md:text-xl text-gray-200 mb-8 max-w-3xl drop-shadow-md font-medium leading-relaxed md:line-clamp-3 line-clamp-2">
-                                    {slide.subtitle}
-                                </p>
-                            )}
-
-                            <div className="flex flex-wrap items-center gap-4">
-                                <a
-                                    href={slide.linkUrl || "/berita"}
-                                    className="group/btn flex items-center gap-2 bg-yellow-400 text-[#0a2744] text-sm md:text-base font-bold px-6 py-3 rounded-full hover:bg-white hover:text-[#0a2744] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1"
-                                >
-                                    Baca Selengkapnya
-                                    <ArrowRight size={18} className="transform group-hover/btn:translate-x-1 transition-transform" />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             ))}
 
@@ -148,8 +121,8 @@ const HeroCarousel: React.FC = () => {
                         key={i}
                         onClick={() => goTo(i)}
                         className={`rounded-full transition-all duration-500 ease-out flex items-center justify-center ${i === current
-                                ? 'w-10 md:w-12 h-2.5 bg-yellow-400 shadow-[0_0_10px_rgba(250,204,21,0.5)]'
-                                : 'w-2.5 h-2.5 bg-white/40 hover:bg-white/80 border border-white/20'
+                            ? 'w-10 md:w-12 h-2.5 bg-yellow-400 shadow-[0_0_10px_rgba(250,204,21,0.5)]'
+                            : 'w-2.5 h-2.5 bg-white/40 hover:bg-white/80 border border-white/20'
                             }`}
                         aria-label={`Go to slide ${i + 1}`}
                     />

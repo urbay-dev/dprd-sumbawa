@@ -63,8 +63,8 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
             >
                 {/* Sidebar Header */}
                 <div className="flex items-center gap-3 p-5 border-b border-white/10">
-                    <div className="w-9 h-9 bg-yellow-400 rounded-lg flex items-center justify-center flex-shrink-0">
-                        <Shield size={18} className="text-[#0f2349]" />
+                    <div className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0 p-1 shadow-inner">
+                        <img src="/LOGO DPRD KSB.png" alt="Logo DPRD KSB" className="w-full h-full object-contain drop-shadow-sm" />
                     </div>
                     <div>
                         <p className="text-white font-bold text-sm leading-tight">Admin Panel</p>

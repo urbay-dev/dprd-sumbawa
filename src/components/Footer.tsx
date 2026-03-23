@@ -12,7 +12,10 @@ const Footer: React.FC = () => {
 
                     {/* Col 1 – Logo + About */}
                     <div className="lg:col-span-2 pr-8">
-                        <div className="font-black text-lg leading-tight mb-4">DPRD KABUPATEN<br />SUMBAWA BARAT</div>
+                        <div className="flex items-center gap-4 mb-5">
+                            <img src="/LOGO DPRD KSB.png" alt="Logo DPRD KSB" className="w-14 h-14 object-contain drop-shadow-md" />
+                            <div className="font-black text-lg leading-tight">DPRD KABUPATEN<br />SUMBAWA BARAT</div>
+                        </div>
                         <p className="text-gray-400 text-sm leading-relaxed mb-6 font-medium">
                             Jl. Garuda No. 1, Taliwang, Kabupaten Sumbawa Barat, NTB 84355<br />
                             Telp/Fax. (0372) 81XXXX<br />

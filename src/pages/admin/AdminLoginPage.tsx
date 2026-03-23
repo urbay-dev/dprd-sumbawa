@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Shield, Eye, EyeOff, LogIn } from 'lucide-react';
+import { Eye, EyeOff, LogIn } from 'lucide-react';
 import { loginAdmin } from '../../services/api';
 
 const AdminLoginPage: React.FC = () => {
@@ -32,8 +32,8 @@ const AdminLoginPage: React.FC = () => {
             <div className="w-full max-w-md">
                 {/* Logo / Branding */}
                 <div className="text-center mb-8">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl mb-4 border border-white/20">
-                        <Shield size={32} className="text-yellow-400" />
+                    <div className="inline-flex items-center justify-center w-20 h-20 bg-white/10 backdrop-blur-sm rounded-2xl mb-4 border border-white/20 p-3 shadow-lg">
+                        <img src="/LOGO DPRD KSB.png" alt="Logo DPRD KSB" className="w-full h-full object-contain drop-shadow-md" />
                     </div>
                     <h1 className="text-2xl font-black text-white">Admin Panel</h1>
                     <p className="text-blue-300 text-sm mt-1">DPRD Kabupaten Sumbawa Barat</p>

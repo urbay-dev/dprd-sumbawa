@@ -84,8 +84,8 @@ const Header: React.FC = () => {
 
                 {/* Left: Logo & Title */}
                 <Link to="/" className="flex items-center gap-3 shrink-0 mr-2 xl:mr-4">
-                    <div className="w-10 h-10 xl:w-12 xl:h-12 rounded-full bg-zinc-900 flex flex-col items-center justify-center border border-yellow-500 shadow-sm shrink-0">
-                        <span className="text-yellow-400 font-black text-[10px] xl:text-xs leading-none">DPRD</span>
+                    <div className="w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center shrink-0">
+                        <img src="/LOGO DPRD KSB.png" alt="Logo DPRD KSB" className="w-full h-full object-contain drop-shadow-lg" />
                     </div>
                     <div className="text-white font-black text-xs md:text-sm lg:text-base xl:text-lg uppercase tracking-wider hidden sm:block">
                         DPRD KABUPATEN<br className="lg:hidden" /> SUMBAWA BARAT
@@ -129,8 +129,8 @@ const Header: React.FC = () => {
                                                             key={child.label}
                                                             to={child.href}
                                                             className={`block px-5 py-3 text-[13px] font-bold transition-all border-l-4 ${isChildActive
-                                                                    ? 'bg-gray-100 text-gray-900 border-red-600'
-                                                                    : 'border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900 hover:border-red-400'
+                                                                ? 'bg-gray-100 text-gray-900 border-red-600'
+                                                                : 'border-transparent text-gray-600 hover:bg-gray-50 hover:text-gray-900 hover:border-red-400'
                                                                 }`}
                                                         >
                                                             {child.label}
