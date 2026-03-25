@@ -87,8 +87,8 @@ const Header: React.FC = () => {
                     <div className="w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center shrink-0">
                         <img src="/LOGO DPRD KSB.png" alt="Logo DPRD KSB" className="w-full h-full object-contain drop-shadow-lg" />
                     </div>
-                    <div className="text-white font-black text-xs md:text-sm lg:text-base xl:text-lg uppercase tracking-wider hidden sm:block">
-                        DPRD KABUPATEN<br className="lg:hidden" /> SUMBAWA BARAT
+                    <div className="text-white font-black text-[10px] sm:text-xs md:text-sm lg:text-base xl:text-lg uppercase tracking-wider whitespace-nowrap">
+                        DPRD KABUPATEN SUMBAWA BARAT
                     </div>
                 </Link>
 
