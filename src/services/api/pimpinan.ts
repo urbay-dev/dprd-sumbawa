@@ -6,14 +6,27 @@ export interface Pimpinan {
   position: string;
   faction: string | null;
   period: string;
+  masaJabatanId: string | null;
+  isPast: boolean;
   imageUrl: string | null;
   bio: string | null;
   order: number;
   createdAt: string;
+  masaJabatan?: {
+    id: string;
+    periode: string;
+    tahunMulai: number;
+    tahunSelesai: number;
+    isAktif: boolean;
+  } | null;
 }
 
-export async function fetchPimpinan(): Promise<Pimpinan[]> {
-  const res = await fetch(`${BASE_URL}/pimpinan`);
+export async function fetchPimpinan(params?: { isPast?: boolean; masaJabatanId?: string }): Promise<Pimpinan[]> {
+  const query = new URLSearchParams();
+  if (params?.isPast !== undefined) query.set('isPast', String(params.isPast));
+  if (params?.masaJabatanId) query.set('masaJabatanId', params.masaJabatanId);
+  const queryStr = query.toString();
+  const res = await fetch(`${BASE_URL}/pimpinan${queryStr ? `?${queryStr}` : ''}`);
   if (!res.ok) return [];
   return res.json();
 }

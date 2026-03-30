@@ -94,6 +94,20 @@ const PimpinanPage: React.FC = () => {
                     </div>
                 ))}
             </div>
+
+            {/* Link ke Pimpinan Terdahulu */}
+            <div className="mt-10 bg-gradient-to-r from-primary to-blue-800 rounded-2xl p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-lg">
+                <div className="text-white text-center sm:text-left">
+                    <h3 className="font-black text-lg">Pimpinan DPRD Terdahulu</h3>
+                    <p className="text-blue-200 text-sm mt-1">Lihat jejak rekam pimpinan DPRD Kabupaten Sumbawa Barat dari masa ke masa.</p>
+                </div>
+                <a
+                    href="/pimpinan/terdahulu"
+                    className="flex-shrink-0 bg-white text-primary font-black text-sm px-6 py-2.5 rounded-xl hover:bg-blue-50 transition-colors shadow-md"
+                >
+                    Lihat Sejarah →
+                </a>
+            </div>
         </main>
     );
 };

@@ -6,8 +6,11 @@ import HomePage from './pages/HomePage';
 import BeritaPage from './pages/BeritaPage';
 import BeritaDetailPage from './pages/BeritaDetailPage';
 import PimpinanPage from './pages/PimpinanPage';
+import PimpinanTerdahuluPage from './pages/PimpinanTerdahuluPage';
 import AKDPage from './pages/AKDPage';
 import SekretariatPage from './pages/SekretariatPage';
+import FraksiPage from './pages/FraksiPage';
+import SilegdaPage from './pages/SilegdaPage';
 
 // Admin Pages
 import AdminLoginPage from './pages/admin/AdminLoginPage';
@@ -15,6 +18,8 @@ import AdminDashboardPage from './pages/admin/AdminDashboardPage';
 import AdminBeritaPage from './pages/admin/AdminBeritaPage';
 import AdminBannerPage from './pages/admin/AdminBannerPage';
 import AdminPimpinanPage from './pages/admin/AdminPimpinanPage';
+import AdminMasaJabatanPage from './pages/admin/AdminMasaJabatanPage';
+import AdminSekretariatPage from './pages/admin/AdminSekretariatPage';
 import AdminUsersPage from './pages/admin/AdminUsersPage';
 
 // Generic placeholder page for unbuilt pages
@@ -53,6 +58,8 @@ function App() {
         <Route path="/admin/berita" element={<AdminBeritaPage />} />
         <Route path="/admin/banner" element={<AdminBannerPage />} />
         <Route path="/admin/pimpinan" element={<AdminPimpinanPage />} />
+        <Route path="/admin/masa-jabatan" element={<AdminMasaJabatanPage />} />
+        <Route path="/admin/sekretariat" element={<AdminSekretariatPage />} />
         <Route path="/admin/users" element={<AdminUsersPage />} />
 
         {/* Public Routes (with Header/Footer) */}
@@ -60,11 +67,14 @@ function App() {
         <Route path="/berita" element={<PublicLayout><BeritaPage /></PublicLayout>} />
         <Route path="/berita/:slug" element={<PublicLayout><BeritaDetailPage /></PublicLayout>} />
         <Route path="/pimpinan" element={<PublicLayout><PimpinanPage /></PublicLayout>} />
+        <Route path="/pimpinan/terdahulu" element={<PublicLayout><PimpinanTerdahuluPage /></PublicLayout>} />
         <Route path="/akd" element={<PublicLayout><AKDPage /></PublicLayout>} />
         <Route path="/akd/:slug" element={<PublicLayout><AKDPage /></PublicLayout>} />
-        <Route path="/fraksi" element={<PublicLayout><PlaceholderPage title="Fraksi DPRD" /></PublicLayout>} />
-        <Route path="/fraksi/:slug" element={<PublicLayout><PlaceholderPage title="Fraksi" /></PublicLayout>} />
+        <Route path="/fraksi" element={<PublicLayout><FraksiPage /></PublicLayout>} />
+        <Route path="/fraksi/:slug" element={<PublicLayout><FraksiPage /></PublicLayout>} />
         <Route path="/sekretariat" element={<PublicLayout><SekretariatPage /></PublicLayout>} />
+        <Route path="/silegda" element={<PublicLayout><SilegdaPage /></PublicLayout>} />
+        <Route path="/silegda/:slug" element={<PublicLayout><SilegdaPage /></PublicLayout>} />
         <Route path="/ppid" element={<PublicLayout><PlaceholderPage title="PPID - Keterbukaan Informasi Publik" /></PublicLayout>} />
         <Route path="/ppid/:slug" element={<PublicLayout><PlaceholderPage title="PPID" /></PublicLayout>} />
         <Route path="/agenda" element={<PublicLayout><PlaceholderPage title="Agenda Kegiatan" /></PublicLayout>} />

@@ -10,6 +10,8 @@ import {
     Menu,
     X,
     ChevronRight,
+    Calendar,
+    Building2,
 } from 'lucide-react';
 
 interface AdminLayoutProps {
@@ -21,6 +23,8 @@ const navItems = [
     { path: '/admin/berita', label: 'Berita', icon: Newspaper },
     { path: '/admin/banner', label: 'Banner Hero', icon: Image },
     { path: '/admin/pimpinan', label: 'Pimpinan', icon: Users },
+    { path: '/admin/masa-jabatan', label: 'Masa Jabatan', icon: Calendar },
+    { path: '/admin/sekretariat', label: 'Sekretariat', icon: Building2 },
     { path: '/admin/users', label: 'Admin Akun', icon: Shield },
 ];
 
