@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { User } from 'lucide-react';
 import { fetchBamusInfo } from '../../services/api';
-import type { BamusInfo, AnggotaBamus } from '../../services/api';
+import type { BamusInfo } from '../../services/api';
 import { renderProfileCard, GridSkeleton } from './SharedComponents';
 
 const BamusContent: React.FC = () => {
