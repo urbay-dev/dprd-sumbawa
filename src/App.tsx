@@ -20,6 +20,8 @@ import AdminBannerPage from './pages/admin/AdminBannerPage';
 import AdminPimpinanPage from './pages/admin/AdminPimpinanPage';
 import AdminMasaJabatanPage from './pages/admin/AdminMasaJabatanPage';
 import AdminSekretariatPage from './pages/admin/AdminSekretariatPage';
+import AdminBamusPage from './pages/admin/AdminBamusPage';
+import AdminBapemperdaPage from './pages/admin/AdminBapemperdaPage';
 import AdminUsersPage from './pages/admin/AdminUsersPage';
 
 // Generic placeholder page for unbuilt pages
@@ -60,6 +62,8 @@ function App() {
         <Route path="/admin/pimpinan" element={<AdminPimpinanPage />} />
         <Route path="/admin/masa-jabatan" element={<AdminMasaJabatanPage />} />
         <Route path="/admin/sekretariat" element={<AdminSekretariatPage />} />
+        <Route path="/admin/bamus" element={<AdminBamusPage />} />
+        <Route path="/admin/bapemperda" element={<AdminBapemperdaPage />} />
         <Route path="/admin/users" element={<AdminUsersPage />} />
 
         {/* Public Routes (with Header/Footer) */}

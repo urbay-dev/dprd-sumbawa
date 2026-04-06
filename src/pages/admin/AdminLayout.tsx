@@ -12,6 +12,8 @@ import {
     ChevronRight,
     Calendar,
     Building2,
+    UsersRound,
+    BookOpen,
 } from 'lucide-react';
 
 interface AdminLayoutProps {
@@ -24,6 +26,8 @@ const navItems = [
     { path: '/admin/banner', label: 'Banner Hero', icon: Image },
     { path: '/admin/pimpinan', label: 'Pimpinan', icon: Users },
     { path: '/admin/masa-jabatan', label: 'Masa Jabatan', icon: Calendar },
+    { path: '/admin/bamus', label: 'Badan Musyawarah', icon: UsersRound },
+    { path: '/admin/bapemperda', label: 'Bapemperda', icon: BookOpen },
     { path: '/admin/sekretariat', label: 'Sekretariat', icon: Building2 },
     { path: '/admin/users', label: 'Admin Akun', icon: Shield },
 ];

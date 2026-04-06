@@ -7,3 +7,5 @@ export * from './api/admin';
 export * from './api/youtube';
 export * from './api/instagram';
 export * from './api/sekretariat';
+export * from './api/bamus';
+export * from './api/bapemperda';
