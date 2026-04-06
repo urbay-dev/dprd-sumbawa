@@ -8,6 +8,7 @@ import type { MasaJabatan } from '../services/api';
 import PimpinanContent from './akd/PimpinanContent';
 import BamusContent from './akd/BamusContent';
 import BapemperdaContent from './akd/BapemperdaContent';
+import BanggarContent from './akd/BanggarContent';
 
 type Submenu = { key: string; title: string };
 type AkdMenu = { key: string; title: string; submenus?: Submenu[] };
@@ -98,6 +99,11 @@ const AKDPage: React.FC = () => {
         // Bapemperda
         if (validSlug === 'bapemperda') {
             return <BapemperdaContent />;
+        }
+
+        // Banggar
+        if (validSlug === 'banggar') {
+            return <BanggarContent />;
         }
 
         // Generic placeholder for other AKD sections

@@ -9,3 +9,4 @@ export * from './api/instagram';
 export * from './api/sekretariat';
 export * from './api/bamus';
 export * from './api/bapemperda';
+export * from './api/banggar';

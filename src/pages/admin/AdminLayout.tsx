@@ -28,6 +28,7 @@ const navItems = [
     { path: '/admin/masa-jabatan', label: 'Masa Jabatan', icon: Calendar },
     { path: '/admin/bamus', label: 'Badan Musyawarah', icon: UsersRound },
     { path: '/admin/bapemperda', label: 'Bapemperda', icon: BookOpen },
+    { path: '/admin/banggar', label: 'Badan Anggaran', icon: BookOpen },
     { path: '/admin/sekretariat', label: 'Sekretariat', icon: Building2 },
     { path: '/admin/users', label: 'Admin Akun', icon: Shield },
 ];
